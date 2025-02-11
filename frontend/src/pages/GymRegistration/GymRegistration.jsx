@@ -5,7 +5,7 @@ const GymRegistration = () => {
   const [formData, setFormData] = useState({
     nome: '',
     indirizzo: '',
-    tipo: '',
+    partitaiva: '',
     email: '',
     telefono: '',
     descrizione: '',
@@ -21,8 +21,18 @@ const GymRegistration = () => {
     });
   };
 
+  const validatePartitaIva = (partitaiva) => {
+    const partitaIvaRegex = /^\d{11}$/;
+    return partitaIvaRegex.test(partitaiva);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validatePartitaIva(formData.partitaiva)) {
+      setErrorMessage('La partita IVA deve essere composta da 11 cifre.');
+      return;
+    }
 
     try {
       const response = await axios.post('http://localhost:3000/registerPalestra', formData);
@@ -32,7 +42,7 @@ const GymRegistration = () => {
       setFormData({
         nome: '',
         indirizzo: '',
-        tipo: '',
+        partitaiva: '',
         email: '',
         telefono: '',
         descrizione: '',
@@ -116,11 +126,11 @@ const GymRegistration = () => {
           />
         </div>
         <div>
-          <label style={{ display: 'block', marginBottom: '10px', fontSize: '1.1em' }}>Tipo:</label>
+          <label style={{ display: 'block', marginBottom: '10px', fontSize: '1.1em' }}>Partita IVA:</label>
           <input
             type="text"
-            name="tipo"
-            value={formData.tipo}
+            name="partitaiva"
+            value={formData.partitaiva}
             onChange={handleChange}
             required
             style={inputStyle}
