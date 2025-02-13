@@ -18,7 +18,9 @@ const SelezionaTrainer = () => {
         return response.json();
       })
       .then((data) => {
-        setTrainers(data);
+        // Filtra i trainer per escludere quelli eliminati
+        const trainersAttivi = data.filter(trainer => !trainer.isDeleted);
+        setTrainers(trainersAttivi);
         setLoading(false);
       })
       .catch((error) => {
@@ -63,7 +65,6 @@ const SelezionaTrainer = () => {
         setTimeout(() => {
           navigate(`/dashboard-utente/${utenteData.id}`);
         }, 1500); // Attendere un attimo prima di navigare
-        }
       })
       .catch((error) => {
         console.error("Errore nel salvataggio del trainer", error);
