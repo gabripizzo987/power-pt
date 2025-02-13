@@ -45,28 +45,24 @@ const SelezionaTrainer = () => {
       return;
     }
 
-    fetch(`http://localhost:3000/api/utente/${utenteData.id}`, {
-      method: "PUT",
+    fetch("http://localhost:3000/api/utente/associa-trainer", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ trainer_id: trainerId }),
+      body: JSON.stringify({ userId: utenteData.id, trainerId }),
     })
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(`Errore nella richiesta: ${response.status} ${response.statusText}`);
         }
 
-        const text = await response.text();
-        return text ? JSON.parse(text) : {};
-      })
-      .then((data) => {
-        if (data) {
-          console.log("Trainer assegnato con successo!", data);
-          setSuccessMessage("Trainer selezionato con successo!");
-          setTimeout(() => {
-            navigate(`/dashboard-utente/${utenteData.id}`);
-          }, 1500); // Attendere un attimo prima di navigare
+        const data = await response.json();
+        console.log(data);
+        setSuccessMessage("Trainer selezionato con successo!");
+        setTimeout(() => {
+          navigate(`/dashboard-utente/${utenteData.id}`);
+        }, 1500); // Attendere un attimo prima di navigare
         }
       })
       .catch((error) => {
@@ -94,7 +90,7 @@ const SelezionaTrainer = () => {
               className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg cursor-pointer transition transform hover:-translate-y-1"
             >
               <img
-                src={trainer.fotoProfilo || "https://via.placeholder.com/150"}
+                src={trainer.profilePicture ? `http://localhost:3000/${trainer.profilePicture.replace("\\", "/")}` : "https://via.placeholder.com/150"}
                 alt={trainer.nome}
                 className="w-full h-40 object-cover rounded-lg mb-4"
               />

@@ -549,7 +549,44 @@ async function run() {
     res.status(500).json({ message: 'Errore nel processare la richiesta' });
   }
       });
-
+      //endpoint per gestire la rimozione dei personal trainer.
+      app.delete("/api/remove-trainer/:id", verifyJWT, async (req, res) => {
+        try {
+            if (req.userRole !== "admin") {
+                return res.status(403).json({ message: "Non autorizzato" });
+            }
+    
+            const trainerId = req.params.id.trim();  // Rimuove spazi vuoti
+if (!ObjectId.isValid(trainerId)) {
+    return res.status(400).json({ message: "ID non valido" });
+}
+    
+            console.log("🔴 Tentativo di eliminazione trainer con ID:", trainerId);
+    
+            // Elimina il trainer
+            const result = await trainerCollection.findOneAndDelete({ _id: new ObjectId(trainerId) });
+    
+            console.log("🟢 Risultato della rimozione:", result);
+    
+            // Verifica se il trainer è ancora nel database
+            const checkTrainer = await trainerCollection.findOne({ _id: new ObjectId(trainerId) });
+    
+            if (checkTrainer) {
+                console.log("⚠️ Il trainer è ancora nel database:", checkTrainer);
+            } else {
+                console.log("✅ Trainer eliminato con successo!");
+            }
+    
+            if (result.deletedCount === 0) {
+                return res.status(404).json({ message: "Trainer non trovato" });
+            }
+    
+            res.status(200).json({ message: "Trainer eliminato definitivamente" });
+        } catch (error) {
+            console.error("❌ Errore nella rimozione del trainer:", error);
+            res.status(500).json({ message: "Errore interno del server" });
+        }
+    });
       // Ottieni i trainer rimossi (con isDeleted = true)
       app.get('/api/deleted-trainers', verifyJWT, async (req, res) => {
   try {
