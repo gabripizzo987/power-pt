@@ -5,231 +5,13 @@
       "nome": "power-pt",
       "indirizzo": "Via Roma 83",
       "email": "powerpt@gmail.com",
-      "telefono": "3884551351",
+      "telefono": "3392921345",
       "descrizione": "palestra",
       "password": "$2b$10$VvIeXCBHzJPWRw638.3KE..p7axre7yPy1ZmnM8ThAXqNP0ZOOodO",
       "partitaIva": "38840000921"
     }
   ],
   "personalTrainer": [
-    {
-      "_id": "674dd1226c421c49ba094b04",
-      "nome": "Luca",
-      "cognome": "Rossi",
-      "email": "lucarossi@gmail.com",
-      "password": "hashed_password",
-      "specializzazione": "bodybuilding",
-      "esperienza": "5",
-      "descrizione": "sono un personal trainer specializzato nel bodybuilding",
-      "id_palestra": "67585b2e273efb169919c87b",
-      "utenti_iscritti": [
-        "674ddada6c421c49ba094b07",
-        "67b129ffbba8a997914b3c40"
-      ],
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "675f0a103ac9630e540896c8",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.pizzo.200@gmail.com",
-      "password": "$2b$10$Xn8MAZk7d/dGrAFS.HyO9OIkZC7H5JBhtwWRmDIRX8sa6hFTeKwU.",
-      "specializzazione": "dfa",
-      "esperienza": "2",
-      "descrizione": "fdas",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-11T23:03:41.177Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "675f0b640a876d6be090caf0",
-      "nome": "Nicola ",
-      "cognome": "cassibba",
-      "email": "nicola@gmail.com",
-      "password": "$2b$10$S5yfX8gZh.dvMeMbshQiUeSWYRYfRD7ighXVeu8uKw684B2TV2mDG",
-      "specializzazione": "forte",
-      "esperienza": "3",
-      "descrizione": "dd",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-11T23:03:38.113Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "675f0c04ec4a73cb2701e1f9",
-      "nome": "Nicola ",
-      "cognome": "cassibba",
-      "email": "nicoldddda@gmail.com",
-      "password": "hfe78",
-      "specializzazione": "forte",
-      "esperienza": "5",
-      "descrizione": "ddfda",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-12T17:00:28.320Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "675f0d36896bc7e6a781d4c6",
-      "nome": "uuu",
-      "cognome": "hkh",
-      "email": "nicolda@gmail.com",
-      "password": "hfe78",
-      "specializzazione": "forte",
-      "esperienza": "3",
-      "descrizione": "ghjh",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-11T23:03:35.250Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "675f0eb3896bc7e6a781d4c7",
-      "nome": "uuu",
-      "cognome": "hkh",
-      "email": "nia@gmail.com",
-      "password": "hfe78",
-      "specializzazione": "forte",
-      "esperienza": "3",
-      "descrizione": "ghjh",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-11T23:03:33.225Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "675f0f96b84e3b8aeadb10ef",
-      "nome": "uuu",
-      "cognome": "hkh",
-      "email": "na@gmail.com",
-      "password": "hfe78",
-      "specializzazione": "forte",
-      "esperienza": "3",
-      "descrizione": "ghjh",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-11T23:03:31.154Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "675f0fb9b84e3b8aeadb10f0",
-      "nome": "fdafsad",
-      "cognome": "fdasdsafa",
-      "email": "fdsafd@gmail.com",
-      "password": "fdafasd",
-      "specializzazione": "fdafdas",
-      "esperienza": "3",
-      "descrizione": "fadsfasdf",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-11T23:03:29.160Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "6796c37f6f505144ca6cc03f",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.pizzo.20@gmail.com",
-      "password": "$2b$10$8J4j4zd4MjpXxGIa/3z.2.dlcaOFpZHIXfAMPSQAV5gH6W/UQJjai",
-      "specializzazione": "dfas",
-      "esperienza": "2",
-      "descrizione": "fdas",
-      "utenti_iscritti": [],
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-11T23:03:11.650Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "679a1b37f8b3a5c8a0914cc0",
-      "nome": "Claudio",
-      "cognome": "Iacono",
-      "email": "claudio.iacono@gmail.com",
-      "password": "$2b$10$KXtpdwZDogSo4yud/JRdxO4YTfDFLu0j4xH0o9ELCzuuHPXo83l16",
-      "specializzazione": "powerlifting",
-      "esperienza": "3",
-      "descrizione": "Sono un personal trainer esperto nel powerlifting",
-      "documentUrl": "/uploads/1738152759843.pdf",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-11T23:15:35.569Z",
-      "isDeleted": true
-    },
-    {
-      "_id": "679c09d528d3356cca2d92a6",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.p@gmail.com",
-      "password": "$2b$10$jqpN2JuGtzPerjCJwPovPulnLCEbBskwf3SoWlhfyxw59nu6VNEgO",
-      "specializzazione": "fdafasd",
-      "esperienza": "3",
-      "descrizione": "dfas",
-      "documentUrl": "/uploads/1738279380871.pdf",
-      "approved": true,
-      "deletedAt": "2025-01-30T23:26:14.966Z",
-      "isDeleted": true,
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679c0b2a28d3356cca2d92a7",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "g@gmail.com",
-      "password": "$2b$10$tM9SCxWhtNCWP1snOgkk1ODXjFM.BSpj4CUKP9XZPBUciAbcm2.VG",
-      "specializzazione": "fdafasd",
-      "esperienza": "2",
-      "descrizione": "dasfasf",
-      "documentUrl": "/uploads/1738279721887.pdf",
-      "approved": true,
-      "deletedAt": "2025-01-30T23:29:04.272Z",
-      "isDeleted": true,
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679c0c2328d3356cca2d92a8",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabri.pizzo.200@gmail.com",
-      "password": "$2b$10$uMN.ZC1gZcv.ghASrLQMyuEG1t6Kim81iFLeuv3X80Au7b/worwye",
-      "specializzazione": "43",
-      "esperienza": "2",
-      "descrizione": "dfa",
-      "documentUrl": "/uploads/1738279971004.pdf",
-      "approved": false,
-      "deletedAt": "2025-01-30T23:33:05.988Z",
-      "isDeleted": true,
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679c9aac28d3356cca2d92a9",
-      "nome": "gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.pi0@gmail.com",
-      "password": "$2b$10$obNTTP6G9Zdrt7GEWRWxcu88.cQfNZQ.8ZahUYEDEBCRGLTQt0cRC",
-      "specializzazione": "fdafasd",
-      "esperienza": "3",
-      "descrizione": "dfaf",
-      "documentUrl": "/uploads/1738316460323.pdf",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679c9b1528d3356cca2d92aa",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.zo.200@gmail.com",
-      "password": "$2b$10$LRCCW3udwzCKqoDRRlynVu.PMP8l5mymX7Xlf.VDHD8n2Ok.AsMH.",
-      "specializzazione": "rfdaa",
-      "esperienza": "3",
-      "descrizione": "dfasfsa",
-      "documentUrl": "/uploads/1738316564522.pdf",
-      "approved": false,
-      "deletedAt": "2025-01-31T09:43:02.305Z",
-      "isDeleted": true,
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
     {
       "_id": "679c9f3e28d3356cca2d92ab",
       "nome": "Mario ",
@@ -242,414 +24,61 @@
       "documentUrl": "/uploads/1738317630631.pdf",
       "approved": true,
       "palestra_id": "67585b2e273efb169919c87b",
-      "profilePicture": "uploads\\1739016865938.png"
-    },
-    {
-      "_id": "679e4b639c9ff0e28fc3c9ba",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.pi.200@gmail.com",
-      "password": "$2b$10$19QrbsXsdT6JyyxfyD5BVuPcVugAD8HiSFKCNEwU2hw1n2flzPtgi",
-      "specializzazione": "fdafdf",
-      "esperienza": "3",
-      "descrizione": "fgkjasdk",
-      "documentUrl": "/uploads/1738427234726.pdf",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67a20d5fffd6076e2c4bf70b",
-      "nome": "prova ",
-      "cognome": "2",
-      "email": "prova2@gmail.com",
-      "password": "$2b$10$w0RGD.YVAtMTcdsSWEWcMO15GowVqPMG0hp.9HbaBtE69eJkLqE5u",
-      "specializzazione": "yoga e pilates",
-      "esperienza": "2",
-      "descrizione": "adsf",
-      "documentUrl": "/uploads/1738673503134.pdf",
-      "approved": true,
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67ace13e7f4bb6d4fd80e260",
-      "nome": "prova",
-      "cognome": "9",
-      "email": "prova9@gmail.com",
-      "password": "$2b$10$lWBlfS60sQkLI1znEfMYjOT5BJjl0mYukjOddnB1ERHDlKrPkF2lW",
-      "specializzazione": "yoga",
-      "esperienza": "5",
-      "descrizione": "wow",
-      "documentUrl": "/uploads/1739383101985.pdf",
-      "approved": true,
+      "profilePicture": "uploads\\1739736479923.jpg",
       "utenti_iscritti": [
-        "67acf119bb8fc4b8b251a4ee"
-      ],
-      "palestra_id": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67b0710218a72de48d5276a8",
-      "nome": "martina",
-      "cognome": "pizzo",
-      "email": "martinapizzo@gmail.com",
-      "password": "$2b$10$1bYmhmzhTq.nrPo2fMfl6ODHSnPf5tUWymbvYK1VYbcc4rWZ0svvu",
-      "specializzazione": "pilates",
-      "esperienza": "10",
-      "descrizione": "sono brava",
-      "documentUrl": "/uploads/1739616514874.pdf",
-      "approved": true,
-      "utenti_iscritti": [
-        "67b0715818a72de48d5276a9"
-      ],
-      "palestra_id": "67585b2e273efb169919c87b",
-      "deletedAt": "2025-02-16T01:17:56.418Z",
-      "isDeleted": true
-    }
-  ],
-  "utente": [
-    {
-      "_id": "674ddada6c421c49ba094b07",
-      "nome": "Nicola",
-      "cognome": "Cassibba",
-      "email": "nicolacassibba@gmail.com",
-      "password": "$2b$10$SAxYYI.GJ/nnXMX7XXyl/.cM.yW5JqFIAA4ubDZ/XMHRL/UkAZuGK",
-      "obiettivi": "dimagrire",
-      "trainer_id": "675da8889563614fb6499e3e",
-      "id_palestra": [
-        "67585b2e273efb169919c87b"
+        "67b248197231d701a7357f0e"
       ]
     },
     {
-      "_id": "675f22ac3b0a2ca27dcdedd4",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gggg@gmail.com",
-      "password": "$2b$10$1sxxHfekrV7pvptpIkZw5OPeCE3eu1zdNr/c5khPc8CwjpvFF2wjq",
-      "obiettivo": "perdere peso",
-      "dataRegistrazione": "2024-12-15T18:40:44.787Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "676ac3a0304d120d4ed7ef6e",
-      "nome": "Gabriele",
-      "cognome": "ii",
-      "email": "giovannibb@gmail.com",
-      "password": "$2b$10$HGg0bEG1PN57u4PiaDMAieZNsYmpXhTXCFwFVVnngPmhEarkpnGxa",
-      "obiettivo": "perdere peso",
-      "dataRegistrazione": "2024-12-24T14:22:24.956Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "676c4c52304d120d4ed7ef7a",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.pizzo.200@gmail.com",
-      "password": "$2b$10$YWaCvwaxfhhwJKevYx9Cee/sV9kSheghMQAwYDrsMXmO4ACAFiiCm",
-      "obiettivo": "gjgy",
-      "dataRegistrazione": "2024-12-25T18:17:54.607Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679e234d1e319ff58fbb9ddd",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.piz@gmail.com",
-      "password": "$2b$10$lhq0/VBoK5wDRpOPptfUzOaJH8ft3xLZ7f./AljHaOnQeUesvgUQa",
-      "obiettivo": "dfadfas",
-      "altezza": 33,
-      "peso": 222,
-      "dataRegistrazione": "2025-02-01T13:36:13.022Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679e4eb4ab22563aef8dbb9d",
-      "nome": "Maurizio",
-      "cognome": "Blanco",
-      "email": "maurizioblanco@gmail.com",
-      "password": "$2b$10$LyJeoRSEdYvRr888t2z.wuMeq2iU.3byljswfGT4FXghdxYnxewJ6",
-      "obiettivo": "mettere massa muscolare",
-      "altezza": 183,
-      "peso": 78,
-      "dataRegistrazione": "2025-02-01T16:41:24.921Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679e5c4de2cb9789b00a5005",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele.pizzddd@gmail.com",
-      "password": "$2b$10$oAbm.klEWZNRM/IZYF7sveTejz8EJNmsp/0AUO.tO9/1lsposOzZq",
-      "obiettivo": "dfafad",
-      "altezza": 12,
-      "peso": 1,
-      "dataRegistrazione": "2025-02-01T17:39:25.536Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679e641879111c20d1d96d97",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabrd.pizzo.200@gmail.com",
-      "password": "$2b$10$9N9rdNm7SaQNuC9xQ6gBlOj6R4L57BO5zK2zlBab7WzX3WmQ75ppG",
-      "obiettivo": "dfasdfad",
-      "altezza": 3233,
-      "peso": 677,
-      "dataRegistrazione": "2025-02-01T18:12:40.811Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679e99e179111c20d1d96d98",
-      "nome": "daniele",
-      "cognome": "iacono",
-      "email": "danieleiacono@gmail.com",
-      "password": "$2b$10$9Vx26FhTVveriFKEbHwtnejrkviCazXPYp0GoYFAIxcMqCSNdeZ9q",
-      "obiettivo": "dimagrie",
-      "altezza": 200,
-      "peso": 100,
-      "dataRegistrazione": "2025-02-01T22:02:09.441Z",
-      "trainer_id": "675f0c04ec4a73cb2701e1f9",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679ea1df41f7acad43f45ed8",
-      "nome": "Vincenzo",
-      "cognome": "Iacono",
-      "email": "vincenzoiacono@gmail.com",
-      "password": "$2b$10$Edkc6FkfEafXiY2Bn1aMYerWiOrskyAvXUXsFXt6Xf.DOIFHNk.Fq",
-      "obiettivo": "mettere massa muscolare",
-      "altezza": 180,
-      "peso": 80,
-      "dataRegistrazione": "2025-02-01T22:36:15.839Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679ea3d49a347d2c22c5165e",
-      "nome": "Gabriele",
-      "cognome": "fdd",
-      "email": "gabriele.pifd200@gmail.com",
-      "password": "$2b$10$JsaJVF.j8eieuSx3cjudTOE0YIkRMjBPTX7.9.UCMRQhtUWY7CIIC",
-      "obiettivo": "dafa",
-      "altezza": 23,
-      "peso": 22,
-      "dataRegistrazione": "2025-02-01T22:44:36.269Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679eb11da56b7c8062e208a3",
-      "nome": "Gabriele",
-      "cognome": "Pizzo",
-      "email": "gabriele@gmail.com",
-      "password": "$2b$10$Hp.s/RrduFKBTvs8qpMEfuIbeheFdhohKoIIt0aX7hqf7LLH9VxQS",
-      "obiettivo": "fdas",
-      "altezza": 3,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-01T23:41:17.042Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679eba80a56b7c8062e208a4",
-      "nome": "Salvo",
-      "cognome": "Belluardo",
-      "email": "salvobelli@gmail.com",
-      "password": "$2b$10$iVdfCwblGfK255O0pa88GOvZCslQejPnw1Elxj0S7FMgi7pbHpyK2",
-      "obiettivo": "gjgy",
-      "altezza": 20,
-      "peso": 200,
-      "dataRegistrazione": "2025-02-02T00:21:20.563Z",
-      "trainer_id": "679a1b37f8b3a5c8a0914cc0",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679f67236315d79af01332f9",
-      "nome": "Luca",
-      "cognome": "Blanco",
-      "email": "lucablanco@gmail.com",
-      "password": "$2b$10$rws7Nt89OupZ7DPYRdFSlOheoXhgfUXe/ICV2za7YQWeiiFMhu0MW",
-      "obiettivo": "perdere peso",
-      "altezza": 190,
-      "peso": 93,
-      "dataRegistrazione": "2025-02-02T12:37:55.069Z",
-      "trainer_id": "674dd1226c421c49ba094b04",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679f69c74a3abf954a0090d5",
-      "nome": "nicola",
-      "cognome": "carella",
-      "email": "nicolacarella@gmail.com",
-      "password": "$2b$10$0JI9DsPtjq5iKy5x78BwPeXR94h1P8HYjj4GMqyUKUiI0bJtPmlkO",
-      "obiettivo": "wow",
-      "altezza": 190,
-      "peso": 97,
-      "dataRegistrazione": "2025-02-02T12:49:11.665Z",
-      "trainer_id": "675f0f96b84e3b8aeadb10ef",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "679f83694a3abf954a0090d6",
-      "nome": "prova",
-      "cognome": "1",
-      "email": "prova1@gmail.com",
-      "password": "$2b$10$5/1KB.ZJbwfk1s4tvsj9mu5OcoVKyonSadfIICfvMOcq3FRP/F.Sy",
-      "obiettivo": "dimagrire",
-      "altezza": 170,
-      "peso": 72,
-      "dataRegistrazione": "2025-02-02T14:38:33.951Z",
-      "trainer_id": "679c9f3e28d3356cca2d92ab",
-      "schede": [
-        "67a00113083c57216a39c674",
-        "67a002fab26e2a34700b8c0b",
-        "67a003e1b26e2a34700b8c0c",
-        "67a0063f6dbb6daaca77c876",
-        "67a008b01eadae18ead60fd5",
-        "67a0095b9ab9931297f4687c",
-        "67a00a30d2d74a000b9ddfcd",
-        "67a00b6781d8fa172464a8a7",
-        "67a00dfbeb1bc0737823931b",
-        "67a0974f3018471a84284eff",
-        "67a0994769c9dfa4e31d4514",
-        "67a09bb88bce9a889b124c2e",
-        "67a15fd5e97b10c7d9cb2ee2",
-        "67a1690d803ba54ff35d7eac",
-        "67ad1dbe93890865896b2ba5",
-        "67af1509198fc25a140aed4c",
-        "67b1375014a36c013e312dad",
-        "67b1385914a36c013e312dae"
+      "_id": "67b247b67231d701a7357f0d",
+      "nome": "Rachele",
+      "cognome": "Cassibba",
+      "email": "rachelecassibba@gmail.com",
+      "password": "$2b$10$mt.0oN92nJOtaeBuyU6StOBmDj5tweXQm9xWhWwYCMYM4Pyss6wxC",
+      "specializzazione": "yoga e pilates",
+      "esperienza": "4",
+      "descrizione": "Insegnante di yoga e pilates con oltre 8 anni di esperienza. Aiuto i miei allievi a migliorare flessibilità, forza e concentrazione, combinando pratiche di rilassamento e tonificazione. Ogni lezione è personalizzata per soddisfare le esigenze individuali.",
+      "documentUrl": "/uploads/1739737014099.pdf",
+      "approved": true,
+      "utenti_iscritti": [
+        "67b276bf8945866aa793cd6f"
       ],
-      "id_palestra": "67585b2e273efb169919c87b"
+      "palestra_id": "67585b2e273efb169919c87b",
+      "profilePicture": "uploads\\1739746077754.jpg"
     },
     {
-      "_id": "67a6372b5e64786a51578500",
-      "nome": "gfs",
-      "cognome": "fdas",
-      "email": "gafda@gmail.com",
-      "password": "$2b$10$ravqm5oz5cjiexxsrAczWus4asiU1MDvzndkbOepaiQwpmFmo1.JG",
-      "obiettivo": "vgfa",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-07T16:39:07.438Z",
-      "id_palestra": "67585b2e273efb169919c87b"
+      "_id": "67b26ae367038d90f94d9110",
+      "nome": "Marco",
+      "cognome": "Togni",
+      "email": "marcotogni@gmail.com",
+      "password": "$2b$10$ceMgMnTn2Mr0BkM3MECKg.FU8k6SAgCMtN8rq92oQme1t.Zj42EWK",
+      "specializzazione": "allenamento funzionale",
+      "esperienza": "2",
+      "descrizione": "sono un Personal trainer specializzato in allenamenti funzionali e programmi di tonificazione muscolare. Con un approccio energico, creo routine sfidanti che migliorano la forza, l'agilità e la resistenza fisica.",
+      "documentUrl": "/uploads/1739746019259.pdf",
+      "approved": true,
+      "utenti_iscritti": [
+        "67b26eebfc751854f82ce1aa"
+      ],
+      "palestra_id": "67585b2e273efb169919c87b",
+      "profilePicture": "uploads\\1739746714344.jpg"
     },
     {
-      "_id": "67a638a76b10a10c01db6422",
-      "nome": "gggf",
-      "cognome": "dfasdsa",
-      "email": "fdsadfsa@gmail.com",
-      "password": "$2b$10$QxhorenGdVwNDB22zyMYxuvkCw26PJZdzimY2h5ofB.CdF4nn0ugy",
-      "obiettivo": "fadssd",
-      "altezza": 160,
-      "peso": 12,
-      "dataRegistrazione": "2025-02-07T16:45:27.384Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67a63a6a67a811e055c8590e",
-      "nome": "fagatrs",
-      "cognome": "daser",
-      "email": "fdasgas@gmail.com",
-      "password": "$2b$10$FKBvw/geepCmq8HUGCQVAuLYnWaf4iVxwidoo.VWhct44si7VILR2",
-      "obiettivo": "fasfsagr",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-07T16:52:58.574Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67a63c5a14d0af7e1c43a01a",
-      "nome": "fhafasdh",
-      "cognome": "asfhasl",
-      "email": "dhasfdsak@gmail.com",
-      "password": "$2b$10$jPRUVE/kA4bEup/eZONg8useBNq7oRZka2Bb56itVUdllXRZgle02",
-      "obiettivo": "ffda",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-07T17:01:14.065Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67a63f596d2fd031ea6d2285",
-      "nome": "gahrrea",
-      "cognome": "gra3rrar",
-      "email": "rredgrfz@gmail.com",
-      "password": "$2b$10$Ej4b1YUyJ8opL.bus7Vw8eTZwMQtTLlc.LQ7opfIzF8CrKtBHesWe",
-      "obiettivo": "rar",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-07T17:14:01.536Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67a64214e6ffb5c90a672771",
-      "nome": "gfagars",
-      "cognome": "gargwra",
-      "email": "grsfsafsad@gmail.com",
-      "password": "$2b$10$GqAma6802g2W4u25lby28./SrjgoAVvhnkCW.mHtttQpC8R/S/CWO",
-      "obiettivo": "artawrd",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-07T17:25:40.580Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67a64675ef1f9ab900205ec3",
-      "nome": "hjasglòdljsdal",
-      "cognome": "dfaslagasdjf",
-      "email": "djahlsfasld@gmail.com",
-      "password": "$2b$10$j8gMP7.d0qaxE07lnlioN.uu.M8Fx4g/2gtEQVUFMbUekGC8lRjh6",
-      "obiettivo": "fdsfahsjldf",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-07T17:44:21.745Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67a6541893d0e4fec14abd8c",
-      "nome": "fasdasdfsadf",
-      "cognome": "fdsfdasfdsasas",
-      "email": "ggggggg@gmail.com",
-      "password": "$2b$10$UmV3//QO9495R9MsMJR0kumsvaytRg0sSNZlR1oIRXXK5AUYxF9YO",
-      "obiettivo": "dfsdasfdsa",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-07T18:42:32.688Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67a9d9108b41f3c8034594e6",
-      "nome": "gkhkgjfgfgfgutf",
-      "cognome": "gjkfggfgkjfj",
-      "email": "gjjggfjfgfhj@gmail.com",
-      "password": "$2b$10$aSIucjytFyuXlXLNR6CkaOO/krgkJprm2GR5VmU4711GSgPDCFJVm",
-      "obiettivo": "gfhfkggh",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-10T10:46:40.779Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67acd417c73d748c43c1c291",
-      "nome": "gasjlòdfshjsaldj",
-      "cognome": "ògasjhdsalòfashd",
-      "email": "dshfasdjlhdaf@gmail.com",
-      "password": "$2b$10$dFeeAhLJpDVCDfBD.e6FMuaU84aYGrYUmn7A.i.RFCDvAbE3FWH4W",
-      "obiettivo": "ssadf",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-12T17:02:15.799Z",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67acd476c73d748c43c1c293",
-      "nome": "fdasjfadsjldshl",
-      "cognome": "fdaldsfasdljf",
-      "email": "gaga@gmail.com",
-      "password": "$2b$10$A.2beO05K47agbAXfcCq2uKOFjWsz35av4lGp74Q9kKu6rHRohaZ2",
-      "obiettivo": "jj",
-      "altezza": 160,
-      "peso": 33,
-      "dataRegistrazione": "2025-02-12T17:03:50.757Z",
-      "trainer_id": "674dd1226c421c49ba094b04",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
+      "_id": "67b26e4336b6e0ee23d859b6",
+      "nome": "Giovanni",
+      "cognome": "Calvo",
+      "email": "giovannicalvo@gmail.com",
+      "password": "$2b$10$9xRw2RzTaMFQPLr8spVuuezmuPPMXAXeQWJoW/hObL1LNmEe/iF76",
+      "specializzazione": "allenamento cardiovascolare e forza",
+      "esperienza": "3",
+      "descrizione": "sono un Personal trainer con focus su allenamenti cardiovascolari e di forza. Utilizzo una combinazione di esercizi ad alta intensità per bruciare calorie e aumentare la massa muscolare, con programmi mirati a ogni livello di fitness.",
+      "documentUrl": "/uploads/1739746883046.pdf",
+      "approved": false,
+      "utenti_iscritti": [],
+      "palestra_id": "67585b2e273efb169919c87b"
+    }
+  ],
+  "utente": [
     {
       "_id": "67acd9075764d81a8ee47521",
       "nome": "prova",
@@ -665,60 +94,56 @@
         "67acf2281d78fdd0bc1b7c93",
         "67ad1dbe93890865896b2ba5",
         "67af722c825f78d8fcbcac14",
-        "67b0707e18a72de48d5276a7"
+        "67b0707e18a72de48d5276a7",
+        "67b24b04c7df34b6247e5361",
+        "67b24ebe97b51168c0fb390d"
       ],
       "id_palestra": "67585b2e273efb169919c87b"
     },
     {
-      "_id": "67ace1f9a7b31c225d0ea9ac",
-      "nome": "hhh",
-      "cognome": "ffff",
-      "email": "hf@gmail.com",
-      "password": "$2b$10$81CbB3tDO2mPhupFfkDwtOHzHzkTL8i8IEI7lI3FzMhoEMRv1WBgK",
-      "obiettivo": "fdafs",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-12T18:01:29.305Z",
-      "trainer_id": "67ace13e7f4bb6d4fd80e260",
-      "id_palestra": "67585b2e273efb169919c87b"
+      "_id": "67b231a08f7df67c9c02f5db",
+      "nome": "raffaele",
+      "cognome": "zago",
+      "email": "raffaelezago@gmail.com",
+      "password": "$2b$10$k6Fg8hpvpxxxSYMc6nr/BOm6.ht1vrUzbMtWGzl/6jKN7X9bFp1/e",
+      "obiettivo": "dimagrire",
+      "altezza": "170",
+      "peso": "89",
+      "dataRegistrazione": "",
+      "trainer_id": "679c9aac28d3356cca2d92a9",
+      "id_palestra": "67585b2e273efb169919c87b",
+      "schede": "67b1385914a36c013e312dae"
     },
     {
-      "_id": "67aceefcc13474a8032bbc9b",
-      "nome": "cazzo",
-      "cognome": "cazzo",
-      "email": "cazzo@gmail.com",
-      "password": "$2b$10$3JaeSjrf9ttw3aRlQKuAxOHSE3LULdWEgTHSHUx.SW6PXFpnvKMr.",
-      "obiettivo": "h",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-12T18:57:00.970Z",
-      "trainer_id": "67ace13e7f4bb6d4fd80e260",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67acf119bb8fc4b8b251a4ee",
-      "nome": "trewt",
-      "cognome": "fadsds",
-      "email": "qw@gmail.com",
-      "password": "$2b$10$LRbLxfFTzdDzyq0bEURj3.aP1N/0mtPlTRQ9JYP6B4oS20YaWFNvK",
-      "obiettivo": "fdada",
-      "altezza": 160,
-      "peso": 45,
-      "dataRegistrazione": "2025-02-12T19:06:01.900Z",
-      "trainer_id": "67ace13e7f4bb6d4fd80e260",
-      "id_palestra": "67585b2e273efb169919c87b"
-    },
-    {
-      "_id": "67b0715818a72de48d5276a9",
-      "nome": "gabriele",
-      "cognome": "10",
-      "email": "gabriele10@gmail.com",
-      "password": "$2b$10$52cTgR8d6GoF9lCtJQlCqeuFf3PPwXXs4/UqH02mWUYgqZFq6yc5m",
+      "_id": "67b248197231d701a7357f0e",
+      "nome": "utente",
+      "cognome": "1",
+      "email": "utente1@gmail.com",
+      "password": "$2b$10$gP4ap5KdE1eYjM.2XWiu5uMERm.d7ToLG.uOFLK1VDwfc6g8VUNqq",
       "obiettivo": "mettere massa muscolare",
-      "altezza": 180,
-      "peso": 85,
-      "dataRegistrazione": "2025-02-15T10:50:00.424Z",
-      "trainer_id": "67b0710218a72de48d5276a8",
+      "altezza": 179,
+      "peso": 69,
+      "dataRegistrazione": "2025-02-16T20:18:33.996Z",
+      "trainer_id": "679c9f3e28d3356cca2d92ab",
+      "id_palestra": "67585b2e273efb169919c87b"
+    },
+    {
+      "_id": "67b26eebfc751854f82ce1aa",
+      "nome": "utente",
+      "cognome": "2",
+      "email": "utente2@gmail.com",
+      "password": "$2b$10$.AnsxNVQIexZvciSQGX7XeS/t.1HaT.DboasAqSgNEkV5V01MkPzi",
+      "obiettivo": "perdita peso",
+      "altezza": 150,
+      "peso": 89,
+      "dataRegistrazione": "2025-02-16T23:04:11.316Z",
+      "trainer_id": "67b26ae367038d90f94d9110",
+      "schede": [
+        "67b26fddfc751854f82ce1ac",
+        "67b27081fc751854f82ce1ad",
+        "67b273ab21919bb3773051a6",
+        "67b2757ad6b9611648d61bbf"
+      ],
       "id_palestra": "67585b2e273efb169919c87b"
     }
   ],
@@ -760,54 +185,8 @@
       "dataCreazione": "2025-02-14T10:03:45.788Z"
     },
     {
-      "_id": "67af722c825f78d8fcbcac14",
-      "trainer_id": "679c9f3e28d3356cca2d92ab",
-      "id_utente": "67acd9075764d81a8ee47521",
-      "descrizione": "fas",
-      "esercizi": [
-        {
-          "nome": "fdfdsa",
-          "descrizione": "fdsad",
-          "video": "https://www.youtube.com/watch?v=DkUG5aJVRBo",
-          "serie": "34",
-          "ripetizioni": "43"
-        },
-        {
-          "nome": "wow",
-          "descrizione": "wow",
-          "serie": "3",
-          "ripetizioni": "12",
-          "video": "https://www.youtube.com/watch?v=DkUG5aJVRBo"
-        },
-        {
-          "nome": "hh",
-          "descrizione": "ff",
-          "serie": "4",
-          "ripetizioni": "12",
-          "video": ""
-        }
-      ],
-      "dataCreazione": "2025-02-14T16:41:15.786Z"
-    },
-    {
-      "_id": "67b0707e18a72de48d5276a7",
-      "trainer_id": "679c9f3e28d3356cca2d92ab",
-      "id_utente": "67acd9075764d81a8ee47521",
-      "descrizione": "martina",
-      "esercizi": [
-        {
-          "nome": "panca piana",
-          "descrizione": "wow",
-          "video": "https://youtu.be/nEXB7ZFrGSo?si=BxCfUf98KPH-pVB5",
-          "serie": "2",
-          "ripetizioni": ""
-        }
-      ],
-      "dataCreazione": "2025-02-15T10:46:22.353Z"
-    },
-    {
       "_id": "67b1385914a36c013e312dae",
-      "trainer_id": "679c9f3e28d3356cca2d92ab",
+      "trainer_id": "67b0710218a72de48d5276a8",
       "id_utente": "679f83694a3abf954a0090d6",
       "descrizione": "fadsfa",
       "esercizi": [
@@ -827,34 +206,67 @@
         }
       ],
       "dataCreazione": "2025-02-16T00:59:05.006Z"
-    }
-  ],
-  "esercizio": [
-    {
-      "_id": "674dd9ee6c421c49ba094b06",
-      "nome": "panca piana",
-      "descrizione": "esercizio per il petto",
-      "video": "https://youtu.be/kWrRwATrqpc?si=7jHCAGnWxxfz50d_",
-      "serie": "3 ",
-      "ripetizioni": "12",
-      "id_scheda": [
-        "674dd6a96c421c49ba094b05"
-      ]
     },
     {
-      "_id": "6755cd4190d2231a3d30cfd8",
-      "nome": "Squat",
-      "descrizione": "Esercizio per le gambe",
-      "video": "https://youtu.be/xyz12345",
-      "serie": "4",
-      "ripetizioni": "10",
-      "id_scheda": "674dd6a96c421c49ba094b05"
+      "_id": "67b24b04c7df34b6247e5361",
+      "trainer_id": "679c9f3e28d3356cca2d92ab",
+      "id_utente": "67acd9075764d81a8ee47521",
+      "descrizione": "scheda2",
+      "esercizi": [
+        {
+          "nome": "squat",
+          "descrizione": "esercizio per gambe",
+          "video": "",
+          "serie": "2",
+          "ripetizioni": "10"
+        }
+      ],
+      "dataCreazione": "2025-02-16T20:31:00.924Z"
+    },
+    {
+      "_id": "67b24ebe97b51168c0fb390d",
+      "trainer_id": "679c9f3e28d3356cca2d92ab",
+      "id_utente": "67acd9075764d81a8ee47521",
+      "descrizione": "scheda3",
+      "esercizi": [
+        {
+          "nome": "panca piana",
+          "descrizione": "petto",
+          "video": "",
+          "serie": "3",
+          "ripetizioni": "12"
+        }
+      ],
+      "dataCreazione": "2025-02-16T20:46:54.286Z"
+    },
+    {
+      "_id": "67b26fddfc751854f82ce1ac",
+      "trainer_id": "67b26ae367038d90f94d9110",
+      "id_utente": "67b26eebfc751854f82ce1aa",
+      "descrizione": "scheda lunedì utente2",
+      "esercizi": [
+        {
+          "nome": "panca piana",
+          "descrizione": "esercizio per petto",
+          "video": "https://youtu.be/kWrRwATrqpc?si=MCNXCMlqT1aAyCCH",
+          "serie": "4",
+          "ripetizioni": "12"
+        },
+        {
+          "nome": "shoulder press",
+          "descrizione": "esercizio per spalle",
+          "video": "https://youtu.be/MANdy0Zc4kc?si=DqpD_sAvYGgtxcJT",
+          "serie": "3",
+          "ripetizioni": "10"
+        }
+      ],
+      "dataCreazione": "2025-02-16T23:08:13.036Z"
     }
   ],
   "iscrizione": [
     {
       "_id": "674f0efcdc17683569a90539",
-      "utenteId": "674ddada6c421c49ba094b07",
+      "utenteId": "67b231a08f7df67c9c02f5db",
       "dataInizio": "2024-01-01T00:00:00.000Z",
       "dataScadenza": "2024-12-31T00:00:00.000Z",
       "tipoAbbonamento": "mensile",
@@ -1266,6 +678,82 @@
           "dataPagamento": "2025-02-15T23:58:26.938Z",
           "metodoPagamento": "card",
           "transazioneId": "cs_test_a1j4buC5uJtgoO1KlyG3UqtjqITpjJMAbP8pdFJciarPw39TgYPAUmhYNg"
+        }
+      ],
+      "palestra_id": "67585b2e273efb169919c87b"
+    },
+    {
+      "_id": "67b1d0acb8a3dc4fca52fa19",
+      "utenteId": "67b1cfbbb8a3dc4fca52fa18",
+      "dataInizio": "2025-02-16T11:49:00.478Z",
+      "dataScadenza": "2025-03-16T11:49:00.478Z",
+      "tipoAbbonamento": "mensile",
+      "stato": "attiva",
+      "pagamenti": [
+        {
+          "pagamentoStripeId": "pi_3Qt6LEAYGtXYhm6H1MB1WBcs",
+          "importo": 30,
+          "statoPagamento": "completato",
+          "dataPagamento": "2025-02-16T11:49:00.480Z",
+          "metodoPagamento": "card",
+          "transazioneId": "cs_test_a16lj0ZsB8xN8B3e5yaPKktq2RM9jaCa7XgQuInst4xwuqTbfV27U59Szw"
+        }
+      ],
+      "palestra_id": "67585b2e273efb169919c87b"
+    },
+    {
+      "_id": "67b248357231d701a7357f0f",
+      "utenteId": "67b248197231d701a7357f0e",
+      "dataInizio": "2025-02-16T20:19:01.243Z",
+      "dataScadenza": "2025-03-16T20:19:01.243Z",
+      "tipoAbbonamento": "mensile",
+      "stato": "attiva",
+      "pagamenti": [
+        {
+          "pagamentoStripeId": "pi_3QtEInAYGtXYhm6H0zeXx46n",
+          "importo": 30,
+          "statoPagamento": "completato",
+          "dataPagamento": "2025-02-16T20:19:01.244Z",
+          "metodoPagamento": "card",
+          "transazioneId": "cs_test_a1jg1Hf4bbzrb4uty8EmfdCbnx92DKTEKc1ITppBFYhntzfS1QrgdVh0gG"
+        }
+      ],
+      "palestra_id": "67585b2e273efb169919c87b"
+    },
+    {
+      "_id": "67b26f0dfc751854f82ce1ab",
+      "utenteId": "67b26eebfc751854f82ce1aa",
+      "dataInizio": "2025-02-16T23:04:45.615Z",
+      "dataScadenza": "2026-02-16T23:04:45.615Z",
+      "tipoAbbonamento": "annuale",
+      "stato": "attiva",
+      "pagamenti": [
+        {
+          "pagamentoStripeId": "pi_3QtGtCAYGtXYhm6H2Mu95Vkp",
+          "importo": 330,
+          "statoPagamento": "completato",
+          "dataPagamento": "2025-02-16T23:04:45.616Z",
+          "metodoPagamento": "card",
+          "transazioneId": "cs_test_a1LPJM23gOdTooS9ndNAXt88OrhqDwAHjNy9XhQH54223opy9yVDXAHxkm"
+        }
+      ],
+      "palestra_id": "67585b2e273efb169919c87b"
+    },
+    {
+      "_id": "67b276d98945866aa793cd70",
+      "utenteId": "67b276bf8945866aa793cd6f",
+      "dataInizio": "2025-02-16T23:38:01.459Z",
+      "dataScadenza": "2025-03-16T23:38:01.459Z",
+      "tipoAbbonamento": "mensile",
+      "stato": "attiva",
+      "pagamenti": [
+        {
+          "pagamentoStripeId": "pi_3QtHPOAYGtXYhm6H0lV1rrFh",
+          "importo": 30,
+          "statoPagamento": "completato",
+          "dataPagamento": "2025-02-16T23:38:01.461Z",
+          "metodoPagamento": "card",
+          "transazioneId": "cs_test_a1CdLvDAFqVgTSqRl1VgMdCwVjzdF4ZE7dhO1I8fRuv7pgG7QwkYjrlZZU"
         }
       ],
       "palestra_id": "67585b2e273efb169919c87b"

@@ -40,7 +40,6 @@ const exportData = async () => {
     const personalTrainer = await fetchData(client, "personal_trainer");
     const utente = await fetchData(client, "utente");
     const schedaAllenamento = await fetchData(client, "scheda_allenamento");
-    const esercizio = await fetchData(client, "esercizio");
     const iscrizione = await fetchData(client, "iscrizione");
 
     // Prepara i dati per l'esportazione
@@ -49,7 +48,6 @@ const exportData = async () => {
       personalTrainer,
       utente,
       schedaAllenamento,
-      esercizio,
       iscrizione,
     };
 
