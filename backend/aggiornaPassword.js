@@ -1,36 +1,37 @@
 const bcrypt = require('bcrypt');
-const { MongoClient, ObjectId } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
-// Connessione a MongoDB
 const uri = "mongodb+srv://gabrielepizzo200:A6zkenIOg69q5jgl@power-pt.jijpm.mongodb.net/?retryWrites=true&w=majority&appName=power-pt";
 const client = new MongoClient(uri);
 
-let data = require('./data.json'); // Rileggi il file JSON
-
 const aggiornaPasswordNelDB = async () => {
   try {
-    // Connessione al database
     await client.connect();
-    const database = client.db("power-pt");
-    const palestraCollection = database.collection("palestra");
+    const db = client.db("power-pt");
 
-    // Cicla tutte le palestre e aggiorna la password
-    for (let palestra of data.palestra) {
-      if (!palestra.password.startsWith('$2b$')) { // Controlla se non è già criptata
+    // Collezioni che devono essere aggiornate
+    const palestraCollection = db.collection("palestra");
+    const utenteCollection = db.collection("utente"); 
+
+    // Aggiorna le password per la collezione palestra
+    const palestre = await palestraCollection.find().toArray();
+    for (let palestra of palestre) {
+      if (!palestra.password.startsWith('$2b$')) {
         const salt = bcrypt.genSaltSync(10);
-        palestra.password = bcrypt.hashSync(palestra.password, salt);
+        const hashedPassword = bcrypt.hashSync(palestra.password, salt);
+        await palestraCollection.updateOne({ _id: palestra._id }, { $set: { password: hashedPassword } });
+        console.log(`Password criptata per palestra ${palestra.email}`);
       }
+    }
 
-      // Aggiorna la password criptata nel database
-      const result = await palestraCollection.updateOne(
-        { email: palestra.email }, // Usa l'email per trovare la palestra
-        { $set: { password: palestra.password } } // Aggiorna la password
-      );
-
-      if (result.modifiedCount > 0) {
-        console.log(`Password aggiornata per palestra con email: ${palestra.email}`);
-      } else {
-        console.log(`Nessun aggiornamento per palestra con email: ${palestra.email}`);
+    // Aggiorna le password per la collezione utente
+    const utenti = await utenteCollection.find().toArray();
+    for (let utente of utenti) {
+      if (!utente.password.startsWith('$2b$')) {
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(utente.password, salt);
+        await utenteCollection.updateOne({ _id: utente._id }, { $set: { password: hashedPassword } });
+        console.log(`Password criptata per utente ${utente.email}`);
       }
     }
 
@@ -38,10 +39,9 @@ const aggiornaPasswordNelDB = async () => {
   } catch (error) {
     console.error('Errore durante l\'aggiornamento delle password nel DB:', error);
   } finally {
-    // Chiudi la connessione al database
     await client.close();
   }
 };
 
 // Esegui lo script
-aggiornaPasswordNelDB().catch((err) => console.error(err));
+aggiornaPasswordNelDB();

@@ -1,11 +1,11 @@
 import React from 'react'
-import HeroContainer from './Hero/HeroContainer'
 import Gallery from './Gallery/Gallery'
+import Hero from './Hero/Hero'
 
 const Home = () => {
   return (
     <section>
-      <HeroContainer/>
+      <Hero/>
       <div className='max-w-screen-x1 mx-auto'>
         <Gallery/>
       </div>

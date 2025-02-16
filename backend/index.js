@@ -3,7 +3,7 @@ const app = express();
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const cors = require('cors');
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const path = require('path');
@@ -61,21 +61,27 @@ async function run() {
         cb(null, 'uploads/'); // Dove verranno salvati i file
         },
         filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Aggiungi un timestamp al nome del file
+        cb(null, Date.now() + path.extname(file.originalname));
         },
         });
         const upload = multer({ storage });
         
         const updateAllTrainersWithPalestraId = async () => {
-          const palestraId = "67585b2e273efb169919c87b"; // Sostituisci con l'ID della palestra
+          const palestraId = "67585b2e273efb169919c87b"; 
         
           try {
             const result = await personalTrainerCollection.updateMany(
               { palestra_id: { $exists: false } },
               { $set: { palestra_id: palestraId } }
             );
+            // Aggiorna tutti gli utenti senza palestra_id
+            const userResult = await utenteCollection.updateMany(
+            { id_palestra: { $exists: false } },
+            { $set: { id_palestra: palestraId } }
+            );
         
             console.log('Tutti i personal trainer sono stati aggiornati con il campo palestra_id', result);
+            console.log('Tutti gli utenti sono stati aggiornati con il campo id_palestra', userResult);
           } catch (err) {
             console.error('Errore nell\'aggiornamento dei personal trainer:', err);
           }
@@ -133,6 +139,7 @@ async function run() {
             res.status(500).json({ message: "Errore nell'aggiornamento", error });
           }
         });
+        // email già esistente sulla registrazione palestra
         app.get('/check-email', async (req, res) => {
           const { email } = req.query;
           const emailExists = await db.collection("palestra").findOne({ email });
@@ -230,6 +237,32 @@ async function run() {
               res.status(500).json({ message: "Errore nel recupero degli utenti" });
           }
         });
+        // Funzione per ottenere i dati di un singolo utente per dashboard utente personalizzata
+        app.get('/api/users/:id', async (req, res) => {
+          try {
+              const userId = req.params.id;
+              console.log('📌 ID Utente:', userId);
+      
+              // Riconnetti il client se non è già connesso
+              if (!client.topology || !client.topology.isConnected()) {
+                  console.log("⚠️ Riconnessione a MongoDB...");
+                  await client.connect();
+              }
+      
+              const user = await client.db("power-pt").collection("utente").findOne({ _id: new ObjectId(userId) });
+      
+              if (user) {
+                  console.log('✅ Utente recuperato:', user);
+                  res.json(user);
+              } else {
+                  console.log("⚠️ Utente non trovato");
+                  res.status(404).send('Utente non trovato');
+              }
+          } catch (error) {
+              console.error('❌ Errore nel recupero dell\'utente:', error);
+              res.status(500).send('Errore nel recupero dell\'utente');
+          }
+        });
         // Endpoint per il login utente
         app.post("/api/login-utente", async (req, res) => {
           const { email, password } = req.body;
@@ -275,7 +308,7 @@ async function run() {
           }
         });
         // Aggiornamento dei dati dell'utente
-        app.put('/update-user/:id', verifyJWT, async (req, res) => {
+        app.put('/update-user/:id', async (req, res) => {
           const id = req.params.id;
           const updatedUser = req.body;
         
@@ -284,18 +317,50 @@ async function run() {
             const db = client.db('power-pt'); // Usa il nome del tuo database
             const utenteCollection = db.collection('utente'); // Modifica con il nome della tua collezione
         
+            // Cripta la password se è stata aggiornata
+            if (updatedUser.password && !updatedUser.password.startsWith('$2b$')) {
+              const salt = await bcrypt.genSalt(10);
+              updatedUser.password = await bcrypt.hash(updatedUser.password, salt);
+            }
+        
             const result = await utenteCollection.updateOne(
               { _id: new ObjectId(id) },
               { $set: updatedUser }
             );
         
-            res.send(result);
+            if (result.modifiedCount === 1) {
+              const updatedUserData = await utenteCollection.findOne({ _id: new ObjectId(id) });
+              res.send(updatedUserData);
+            } else {
+              res.status(404).json({ message: "Utente non trovato" });
+            }
           } catch (error) {
             console.error("Errore nell'aggiornamento dell'utente:", error);
             res.status(500).json({ message: "Errore nell'aggiornamento dell'utente" });
-          } 
+          }
         });
-
+        // Eliminazione utente (fatta da utente)
+        app.delete('/api/users/:id', async (req, res) => {
+          try {
+            await client.connect();
+            const database = client.db('power-pt'); // Sostituisci con il nome del tuo database
+            const collection = database.collection('utente'); // Sostituisci con il nome della tua collezione
+        
+            const userId = req.params.id;
+            const result = await collection.deleteOne({ _id: new ObjectId(userId) });
+        
+            if (result.deletedCount === 0) {
+              return res.status(404).json({ message: "Utente non trovato" });
+            }
+        
+            res.status(200).json({ message: "Account eliminato con successo" });
+          } catch (error) {
+            console.error("Errore nell'eliminazione dell'account:", error);
+            res.status(500).json({ message: "Errore nell'eliminazione dell'account" });
+          } finally {
+            await client.close();
+          }
+        });
         // Rotta di registrazione del Personal Trainer
         app.post('/register-trainer', upload.single('document'), async (req, res) => {
           const { nome, cognome, email, password, specializzazione, esperienza, descrizione } = req.body;
@@ -325,6 +390,7 @@ async function run() {
               descrizione,
               documentUrl: `/uploads/${req.file.filename}`, // URL del file caricato
               approved: false,  // Profilo non ancora approvato
+              utenti_iscritti: []
             };
         
             await personalTrainerCollection.insertOne(newTrainer);
@@ -334,8 +400,6 @@ async function run() {
             res.status(500).json({ error: true, message: 'Errore interno del server' });
           }
         });
-        
-
         // Rotta per la registrazione della Palestra
         app.post('/registerPalestra', async (req, res) => {
           const { nome, email, password } = req.body;
@@ -368,7 +432,6 @@ async function run() {
             res.status(500).send({ error: true, message: 'Errore durante la registrazione' });
           }
         });
-
         // Login per la Palestra
         app.post("/login-palestra", async (req, res) => {
           const { email, password } = req.body;
@@ -402,9 +465,8 @@ async function run() {
             return res.status(500).json({ message: "Errore interno del server." });
           }
         });
-
-      // Endpoint per ottenere i personal trainer
-      app.get("/api/personal-trainers", async (req, res) => {
+        // Endpoint per ottenere i personal trainer
+        app.get("/api/personal-trainers", async (req, res) => {
         try {
           if (!client.topology || !client.topology.isConnected()) {
             await client.connect();
@@ -425,10 +487,10 @@ async function run() {
           console.error("Errore durante il recupero dei personal trainer:", error);
           res.status(500).json({ message: "Errore durante il recupero dei personal trainer" });
         }
-      });
+        });
 
-      //Endpoint per login personal trainer
-      app.post('/api/login-trainer', async (req, res) => {
+        //Endpoint per login personal trainer
+        app.post('/api/login-trainer', async (req, res) => {
         const { email, password } = req.body;
       
         try {
@@ -471,10 +533,9 @@ async function run() {
           console.error("Errore durante il login:", error);
           res.status(500).json({ message: "Errore durante il login" });
         }
-      });
-
-      // Personal trainer in attesa di approvazione o rimozione da parte di proprietario palestra
-      app.get('/pending-trainers', verifyJWT, async (req, res) => {
+        });
+        // Personal trainer in attesa di approvazione o rimozione da parte di proprietario palestra
+        app.get('/pending-trainers', verifyJWT, async (req, res) => {
         try {
           await client.connect();
           const trainers = await personalTrainerCollection.find({ approved: false }).toArray();
@@ -483,9 +544,9 @@ async function run() {
           console.error('Errore nel recupero dei personal trainer:', error);
           res.status(500).json({ error: true, message: 'Errore nel recupero dei personal trainer' });
         }
-      });
-      // Rotta per ottenere tutti i personal trainer approvati
-      app.get('/api/approved-trainers', verifyJWT, async (req, res) => {
+        });
+        // Rotta per ottenere tutti i personal trainer approvati
+        app.get('/api/approved-trainers', verifyJWT, async (req, res) => {
         try {
           await client.connect();
           const trainers = await db.collection('personal_trainer').find({ approved: true }).toArray();
@@ -494,10 +555,9 @@ async function run() {
           console.error('Errore nel recupero dei trainer approvati:', error);
           res.status(500).json({ message: 'Errore nel recupero dei trainer approvati' });
         }
-      });
-      
-      // Rotta per approvare un personal trainer
-      app.post('/api/approve-trainer/:id', async (req, res) => {
+        });
+        // Rotta per approvare un personal trainer
+        app.post('/api/approve-trainer/:id', async (req, res) => {
         try {
           const { id } = req.params;
           const objectId = new ObjectId(id);  // Usa ObjectId per il confronto
@@ -526,9 +586,9 @@ async function run() {
           console.error('Errore durante l\'approvazione del trainer:', error);
           res.status(500).send('Errore interno del server');
         }
-      });
-      // Rimuove un personal trainer (logico)
-      app.delete('/api/remove-trainer/:trainerId', verifyJWT, async (req, res) => {
+        });
+        // Rimuove un personal trainer (logico)
+        app.delete('/api/remove-trainer/:trainerId', verifyJWT, async (req, res) => {
   const { trainerId } = req.params;
   console.log("Trainer ID:", trainerId); // Log dell'ID del trainer
   try {
@@ -548,9 +608,9 @@ async function run() {
     console.error('Errore nel processare la richiesta:', error); // Log dell'errore
     res.status(500).json({ message: 'Errore nel processare la richiesta' });
   }
-      });
-      //endpoint per gestire la rimozione dei personal trainer.
-      app.delete("/api/remove-trainer/:id", verifyJWT, async (req, res) => {
+        });
+        //endpoint per gestire la rimozione dei personal trainer.
+        app.delete("/api/remove-trainer/:id", verifyJWT, async (req, res) => {
         try {
             if (req.userRole !== "admin") {
                 return res.status(403).json({ message: "Non autorizzato" });
@@ -586,9 +646,9 @@ if (!ObjectId.isValid(trainerId)) {
             console.error("❌ Errore nella rimozione del trainer:", error);
             res.status(500).json({ message: "Errore interno del server" });
         }
-    });
-      // Ottieni i trainer rimossi (con isDeleted = true)
-      app.get('/api/deleted-trainers', verifyJWT, async (req, res) => {
+        });
+        // Ottieni i trainer rimossi (con isDeleted = true)
+        app.get('/api/deleted-trainers', verifyJWT, async (req, res) => {
   try {
     const deletedTrainers = await personalTrainerCollection.find({ isDeleted: true }).toArray();
 
@@ -597,10 +657,9 @@ if (!ObjectId.isValid(trainerId)) {
     console.error('Errore nel processare la richiesta:', error); // Log dell'errore
     res.status(500).json({ message: 'Errore nel processare la richiesta' });
   }
-      });
-
-      // Aggiungi la foto del profilo del personal trainer
-      app.post('/upload-profile-pic', upload.single('profilePic'), async (req, res) => {
+        });
+        // Aggiungi la foto del profilo del personal trainer (dalla dashboard personal trainer)
+        app.post('/upload-profile-pic', upload.single('profilePic'), async (req, res) => {
   try {
     const file = req.file;
     if (!file) {
@@ -619,10 +678,9 @@ if (!ObjectId.isValid(trainerId)) {
   } catch (err) {
     res.status(500).json({ error: 'Errore nel caricamento della foto' });
   }
-      });
-
-      //ottenere id trainer url
-      app.get('/api/trainer/overview/:id', async (req, res) => {
+        });
+        //ottenere id trainer url
+        app.get('/api/trainer/overview/:id', async (req, res) => {
         const { id } = req.params;
       
         try {
@@ -646,10 +704,9 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
-      
-      //endpoint per aggiornare personal trainer, dal suo profilo (personal trainer)
-      app.put('/api/trainer/:id', upload.single('profilePicture'), async (req, res) => {
+        });
+        //endpoint per aggiornare personal trainer, dal suo profilo (personal trainer)
+        app.put('/api/trainer/:id', upload.single('profilePicture'), async (req, res) => {
         const { id } = req.params;
         const { nome, cognome, specializzazione, palestra_id } = req.body;
         const profilePicture = req.file;
@@ -689,9 +746,9 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
-      // Endpoint per creare una sessione di pagamento con Stripe
-      app.post('/api/creaCheckoutSession', async (req, res) => {
+        });
+        // Endpoint per creare una sessione di pagamento con Stripe
+        app.post('/api/creaCheckoutSession', async (req, res) => {
         const { userId, tipoAbbonamento } = req.body;
       
         // Controllo parametri
@@ -731,10 +788,9 @@ if (!ObjectId.isValid(trainerId)) {
             console.error('Errore nella creazione della sessione di pagamento:', error);
             res.status(500).send('Errore nel processo di pagamento');
         }
-    });
-    
-      // Endpoint per inserire l'iscrizione creata con successo nel database con tutti i dati
-      app.post('/api/stripeWebhook', express.raw({ type: 'application/json' }), async (req, res) => {
+        });
+        // Endpoint per inserire l'iscrizione creata con successo nel database con tutti i dati
+        app.post('/api/stripeWebhook', express.raw({ type: 'application/json' }), async (req, res) => {
         const sig = req.headers['stripe-signature'];
       
         let event;
@@ -781,9 +837,9 @@ if (!ObjectId.isValid(trainerId)) {
         }
       
         res.json({ received: true });
-      });
-  
-    app.get('/api/iscrizioni', async (req, res) => {
+        });
+        // Endpoint per ottenere le iscrizioni
+        app.get('/api/iscrizioni', async (req, res) => {
       try {
           const iscrizioni = await iscrizioneCollection.find({}).toArray();
           res.json(iscrizioni);
@@ -791,9 +847,24 @@ if (!ObjectId.isValid(trainerId)) {
           console.error('Errore nel recupero delle iscrizioni:', error);
           res.status(500).send('Errore nel recupero delle iscrizioni');
       }
-  });
-      // server.js (o controller specifico per i trainer)
-      app.get('/api/trainers', async (req, res) => {
+        });
+        // Rotta per recuperare l'iscrizione di un singolo utente da (utentedashboard)
+        app.get('/api/iscrizioni/:utenteId', async (req, res) => {
+  try {
+    const utenteId = req.params.utenteId;
+    const iscrizione = await iscrizioneCollection.findOne({ utenteId: utenteId });
+    if (iscrizione) {
+      res.json(iscrizione);
+    } else {
+      res.status(404).send('Iscrizione non trovata');
+    }
+  } catch (error) {
+    console.error('Errore nel recupero dell\'iscrizione:', error);
+    res.status(500).send('Errore nel recupero dell\'iscrizione');
+  }
+        });
+        // server.js (o controller specifico per i trainer)
+        app.get('/api/trainers', async (req, res) => {
         try {
           const trainers = await personalTrainerCollection.find({ approved: true }).toArray(); // Recupera solo i trainer approvati
           res.status(200).json(trainers);
@@ -801,10 +872,8 @@ if (!ObjectId.isValid(trainerId)) {
           console.error("Errore nel recupero dei trainer:", error); // Log dell'errore
           res.status(500).json({ message: 'Errore nel recupero dei trainer', error: error.message });
         }
-      });
-      
-
-      app.put('/api/utente/:id', async (req, res) => {
+        });
+        app.put('/api/utente/:id', async (req, res) => {
         const { id } = req.params;
         const { trainer_id } = req.body; // ID del trainer selezionato
   
@@ -834,20 +903,68 @@ if (!ObjectId.isValid(trainerId)) {
           console.error('Errore durante l\'aggiornamento dell\'utente:', error);
           res.status(500).json({ message: 'Errore nell\'aggiornare l\'utente' });
         }
-      });
-  
-      // Endpoint per aggiornare il trainer dell'utente
-      app.post('/api/utente/associa-trainer', (req, res) => {
-  const { userId, trainerId } = req.body;
-  
-  // Trova l'utente e aggiorna il trainer_id
-  Utente.updateOne({ _id: userId }, { trainer_id: trainerId })
-    .then(() => res.status(200).json({ message: 'Trainer assegnato correttamente!' }))
-    .catch(err => res.status(500).json({ error: err.message }));
-      });
-
-      // Aggiungi la route per ottenere gli utenti di un personal trainer
-      app.get('/api/trainer/:id/users', async (req, res) => {
+        });
+        // Selezionare personal trainer dopo pagamento (da utente)
+        app.post('/api/utente/associa-trainer', async (req, res) => {
+        const { userId, trainerId } = req.body;
+      
+        if (!userId || !trainerId) {
+          return res.status(400).json({ error: 'userId e trainerId sono obbligatori' });
+        }
+      
+        try {
+          // Converte gli ID in ObjectId
+          const userObjectId = new ObjectId(userId);
+          const trainerObjectId = new ObjectId(trainerId);
+      
+          console.log('userId:', userObjectId, 'trainerId:', trainerObjectId);
+      
+          await client.connect();
+          const db = client.db('power-pt');
+      
+          // Verifica se l'utente esiste
+          const utente = await db.collection('utente').findOne({ _id: userObjectId });
+          if (!utente) {
+            return res.status(404).json({ error: 'Utente non trovato' });
+          }
+      
+          // Verifica se il trainer esiste
+          const trainer = await db.collection('personal_trainer').findOne({ _id: trainerObjectId });
+          if (!trainer) {
+            return res.status(404).json({ error: 'Trainer non trovato' });
+          }
+      
+          // 1️⃣ Assegna il trainer all'utente
+          const utenteUpdate = await db.collection('utente').updateOne(
+            { _id: userObjectId }, 
+            { $set: { trainer_id: trainerObjectId } }
+          );
+          console.log('Utente aggiornato:', utenteUpdate);
+      
+          // 2️⃣ Aggiungi l'utente alla lista `utenti_iscritti` del trainer
+          const trainerUpdate = await db.collection('personal_trainer').updateOne(
+            { _id: trainerObjectId }, 
+            { $addToSet: { utenti_iscritti: userObjectId } }
+          );
+          console.log('Trainer aggiornato:', trainerUpdate);
+      
+          if (utenteUpdate.modifiedCount === 0) {
+            return res.status(404).json({ error: 'Utente non trovato o non aggiornato' });
+          }
+      
+          if (trainerUpdate.modifiedCount === 0) {
+            return res.status(404).json({ error: 'Trainer non aggiornato' });
+          }
+      
+          res.status(200).json({ message: 'Trainer assegnato e aggiornato correttamente!' });
+      
+        } catch (error) {
+          console.error('Errore durante l\'assegnazione del trainer:', error);
+          res.status(500).json({ error: 'Errore interno del server' });
+        }
+        });
+        // Aggiungi la route per ottenere gli utenti di un personal trainer
+        app.get('/api/trainer/:id/users', async (req, res) => {
         console.log('ID del trainer ricevuto:', req.params.id); // Log dell'ID ricevuto
         try {
           const trainerId = req.params.id;
@@ -888,10 +1005,10 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
+        });
               //tutte le rotte per la gestione schede
-      // Funzione per creare una nuova scheda di allenamento
-      app.post("/crea-scheda", async (req, res) => {
+        // Funzione per creare una nuova scheda di allenamento
+        app.post("/crea-scheda", async (req, res) => {
         try {
           const { trainer_id, id_utente, descrizione, esercizi } = req.body;
           console.log("Dati ricevuti:", req.body); // Log dei dati ricevuti
@@ -945,19 +1062,18 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
-      // Funzione per ottenere tutte le schede di allenamento
-      app.get('/schede', async (req, res) => {
+        });
+        // Funzione per ottenere tutte le schede di allenamento
+        app.get('/schede', async (req, res) => {
   try {
     const schede = await schedaAllenamentoCollection.find().toArray();
     res.status(200).json(schede);
   } catch (err) {
     res.status(500).json({ error: 'Errore nel recupero delle schede' });
   }
-      });
-
-      // Funzione per ottenere una scheda per ID (modificata per includere gli esercizi)
-      app.get('/scheda/:id', async (req, res) => {
+        });
+        // Funzione per ottenere una scheda per ID (modificata per includere gli esercizi)
+        app.get('/scheda/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -975,10 +1091,9 @@ if (!ObjectId.isValid(trainerId)) {
   } catch (err) {
     res.status(500).json({ error: 'Errore nel recupero della scheda e degli esercizi' });
   }
-      });
-
-      // Funzione per aggiornare una scheda di allenamento
-      app.put('/aggiorna-scheda/:id', async (req, res) => {
+        });
+        // Funzione per aggiornare una scheda di allenamento
+        app.put('/aggiorna-scheda/:id', async (req, res) => {
         const { id } = req.params;
         const { descrizione, esercizi, id_utente, trainer_id } = req.body;
       
@@ -1010,10 +1125,9 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
-
-      // Funzione per eliminare una scheda di allenamento
-      app.delete('/schede/:id', async (req, res) => {
+        });
+        // Funzione per eliminare una scheda di allenamento
+        app.delete('/schede/:id', async (req, res) => {
         try {
           const { id } = req.params;
       
@@ -1048,11 +1162,9 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
-
-
-      // Backend (Express.js)
-      app.get('/esercizi', async (req, res) => {
+        });
+        // Backend (Express.js)
+        app.get('/esercizi', async (req, res) => {
         try {
           await client.connect();
           const db = client.db('power-pt'); // Usa il nome del tuo database
@@ -1066,10 +1178,9 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
-
-      //Endpoint per ottenere gli utenti assegnati a un trainer
-      app.get('/api/trainer/:trainerId/utenti', async (req, res) => {
+        });
+        //Endpoint per ottenere gli utenti assegnati a un trainer
+        app.get('/api/trainer/:trainerId/utenti', async (req, res) => {
         try {
           const trainerId = req.params.trainerId;
       
@@ -1085,10 +1196,9 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
-
-      //Endpoint per assegnare una scheda di allenamento
-      app.post("/api/trainer/:trainerId/assegnaScheda", async (req, res) => {
+        });
+        //Endpoint per assegnare una scheda di allenamento
+        app.post("/api/trainer/:trainerId/assegnaScheda", async (req, res) => {
   try {
       const { id_utente, descrizione, id_esercizi } = req.body;
       const trainerId = req.params.trainerId;
@@ -1110,10 +1220,9 @@ if (!ObjectId.isValid(trainerId)) {
   } catch (error) {
       res.status(500).json({ message: "Errore nell'assegnazione della scheda", error });
   }
-      });
-
-      // Funzione per ottenere tutte le schede di allenamento di un trainer specifico
-      app.get('/schede/:trainer_id', async (req, res) => {
+        });
+        // Funzione per ottenere tutte le schede di allenamento di un trainer specifico
+        app.get('/schede/:trainer_id', async (req, res) => {
         const { trainer_id } = req.params;
       
         try {
@@ -1129,25 +1238,34 @@ if (!ObjectId.isValid(trainerId)) {
         } finally {
           await client.close();
         }
-      });
-      // Enpoint per ottenere la palestra su modifica profilo trainer
-      app.get('/api/palestra/:id', verifyJWT, async (req, res) => {
-        const id = req.params.id;
-        console.log(`Ricevuto richiesta per palestra con ID: ${id}`);
+        });
+        // Enpoint per ottenere la palestra su modifica profilo trainer
+        app.get('/api/palestra/:id', verifyJWT, async (req, res) => {
         try {
-          const palestra = await palestraCollection.findOne({ _id: new ObjectId(id) });
-          if (!palestra) {
-            console.log(`Palestra con ID ${id} non trovata`);
-            return res.status(404).json({ error: 'Palestra non trovata' });
-          }
-          console.log(`Palestra trovata: ${JSON.stringify(palestra)}`);
-          res.status(200).json(palestra);
+            const id = req.params.id;
+            console.log(`📌 Ricevuto richiesta per palestra con ID: ${id}`);
+    
+            // Controlla se MongoDB è connesso, altrimenti riconnettilo
+            if (!client.topology || !client.topology.isConnected()) {
+                console.log("⚠️ Riconnessione a MongoDB...");
+                await client.connect();
+            }
+    
+            const palestra = await client.db('power-pt').collection('palestra').findOne({ _id: new ObjectId(id) });
+    
+            if (!palestra) {
+                console.log(`⚠️ Palestra con ID ${id} non trovata`);
+                return res.status(404).json({ error: 'Palestra non trovata' });
+            }
+    
+            console.log(`✅ Palestra trovata: ${JSON.stringify(palestra)}`);
+            res.status(200).json(palestra);
         } catch (err) {
-          console.error(`Errore nel recupero della palestra con ID ${id}:`, err);
-          res.status(500).json({ error: 'Errore nel recupero della palestra' });
+            console.error(`❌ Errore nel recupero della palestra con ID ${id}:`, err);
+            res.status(500).json({ error: 'Errore nel recupero della palestra' });
         }
-      });
-      app.post('/api/aggiornaPagamento', async (req, res) => {
+        });
+        app.post('/api/aggiornaPagamento', async (req, res) => {
         const { sessionId } = req.body;
     
         try {
@@ -1177,7 +1295,7 @@ if (!ObjectId.isValid(trainerId)) {
                     metodoPagamento,
                     transazioneId
                 }],
-                palestra_id: '67585b2e273efb169919c87b' // Recupera in base alla logica
+                palestra_id: '67585b2e273efb169919c87b'
             };
     
             await iscrizioneCollection.insertOne(nuovaIscrizione);
@@ -1187,7 +1305,60 @@ if (!ObjectId.isValid(trainerId)) {
             console.error('Errore nel salvataggio su MongoDB:', err);
             res.status(500).send('Errore nel salvataggio');
         }
-    });
+        });
+        //prendere il personal trainer associato all'utente dal dashboard utente
+        app.get('/api/trainers/:trainerId', async (req, res) => {
+      try {
+        const trainerId = req.params.trainerId;
+        console.log(`📌 [Backend] Richiesta per il trainer con ID: ${trainerId}`);
+    
+        const trainer = await personalTrainerCollection.findOne({ _id: new ObjectId(trainerId) });
+    
+        if (!trainer) {
+          console.log('⚠️ [Backend] Trainer non trovato nel database.');
+          return res.status(404).send({ message: 'Trainer not found' });
+        }
+    
+        // ✅ Correggiamo il percorso dell'immagine
+        if (trainer.profilePicture) {
+          trainer.profilePicture = trainer.profilePicture.replace(/\\/g, '/'); // Sostituisce \ con /
+        }
+    
+        console.log('✅ [Backend] Trainer trovato:', trainer);
+        res.json(trainer);
+      } catch (error) {
+        console.error('❌ [Backend] Errore nel recupero del trainer:', error);
+        res.status(500).send({ message: 'Internal Server Error' });
+      }
+        });
+        // Endpoint per ottenere le schede di allenamento dell'utente
+        app.get('/api/schede-utente/:userId', async (req, res) => {
+      const { userId } = req.params;
+    
+      // Verifica se l'ID è valido
+      if (!ObjectId.isValid(userId)) {
+        return res.status(400).json({ message: 'ID utente non valido' });
+      }
+    
+      try {
+        // Connessione al database
+        await client.connect();
+        const db = client.db('power-pt'); // Definisci db qui, dopo aver connesso il client
+        const schede = await db.collection('scheda_allenamento').find({ id_utente: userId }).toArray();
+
+    
+        if (schede.length === 0) {
+          return res.status(404).json({ message: 'Nessuna scheda trovata per questo utente' });
+        }
+    
+        res.json(schede);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Errore nel recuperare le schede dell\'utente', error: error.message });
+      } 
+      
+        });
+    
       // Funzione di disconnessione dal database
         app.listen(process.env.PORT || 3000, () => {
             console.log("Server in ascolto sulla porta 3000");

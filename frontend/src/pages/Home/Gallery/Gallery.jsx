@@ -1,6 +1,9 @@
 import React from 'react'
 import pexels1 from "../../../assets/gallary/pexels1.png"
 import pexels2 from "../../../assets/gallary/pexels2.png"
+import pexels3 from "../../../assets/gallary/pexels3.jpg"
+import pexels4 from "../../../assets/gallary/pexels4.jpg"
+import pexels5 from "../../../assets/gallary/pexels5.jpg"
 
 
 const Gallery = () => {
@@ -20,13 +23,13 @@ const Gallery = () => {
                     <img src={pexels2} alt="" className='md:h-[350px] rounded-sm'/>
                 </div>
                 <div>
-                    <img src={pexels2} alt="" className='md:h-[350px] rounded-sm'/>
+                    <img src={pexels4} alt="" className='md:h-[350px] rounded-sm'/>
                 </div>
                 <div>
-                    <img src={pexels2} alt="" className='md:h-[350px] rounded-sm'/>
+                    <img src={pexels3} alt="" className='md:h-[350px] rounded-sm'/>
                 </div>
                 <div>
-                    <img src={pexels2} alt="" className='md:h-[350px] rounded-sm'/>
+                    <img src={pexels5} alt="" className='md:h-[350px] rounded-sm'/>
                 </div>
             </div>
         </div>

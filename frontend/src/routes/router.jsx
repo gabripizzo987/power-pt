@@ -18,6 +18,11 @@ import SelezionaTrainer from "../pages/DashboardUtente/SelezionaTrainer/Selezion
 import GestioneSchede from "../pages/DashboardPersonalTrainer/GestioneSchede/GestioneSchede";
 import ModificaProfiloTrainer from "../pages/DashboardPersonalTrainer/ModificaProfiloTrainer/ModificaProfiloTrainer";
 import ModificaProfiloPalestra from "../pages/DashboardPalestra/ModificaProfiloPalestra/ModificaProfiloPalestra";
+import PersonalTrainers from "../components/headers/PersonalTrainer";
+import PianoAbbonamento from "../components/PianoAbbonamento";
+import Termini from "../pages/Termini";
+import Privacy from "../pages/Privacy";
+
 
  // Assicurati che il percorso sia corretto
  export const router = createBrowserRouter([
@@ -97,7 +102,24 @@ import ModificaProfiloPalestra from "../pages/DashboardPalestra/ModificaProfiloP
             {
                 path: "modifica-profilo-palestra",
                 element: <ModificaProfiloPalestra/>
+            },
+            {
+                path: "personaltrainer",
+                element: <PersonalTrainers/>
+            },
+            {
+                path: "piano-abbonamenti",
+                element: <PianoAbbonamento/>
+            },
+            {
+                path: "terms",
+                element: <Termini/>
+            },
+            {
+                path: "privacy",
+                element: <Privacy/>
             }
+            
         ]
     },
  ]);

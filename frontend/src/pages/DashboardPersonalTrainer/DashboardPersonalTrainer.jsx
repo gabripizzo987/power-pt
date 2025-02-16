@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { FaHome, FaUsers, FaDumbbell, FaUserCircle } from "react-icons/fa";
+import { FaHome, FaUsers, FaDumbbell, FaUserCircle, FaSignOutAlt } from "react-icons/fa";
 
 const DashboardPersonalTrainer = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-  const [workouts, setWorkouts] = useState([]);
   const [profile, setProfile] = useState(null);
+  const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!id) {
@@ -43,6 +45,30 @@ const DashboardPersonalTrainer = () => {
     fetchOverview();
   }, [id]);
 
+  const fetchUserDetails = async (userId) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("Token non trovato. Effettua il login.");
+        return;
+      }
+
+      const { data } = await axios.get(`http://localhost:3000/api/users/${userId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setSelectedUser(data);
+    } catch (error) {
+      console.error("Errore nel recupero dei dettagli dell'utente:", error);
+      setError("Errore nel recupero dei dettagli dell'utente.");
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("personalTrainer");
+    navigate("/login-trainer");
+  };
+
   return (
     <div className="flex pt-20">
       <div className="bg-gray-800 text-white w-64 min-h-screen shadow-lg">
@@ -63,6 +89,10 @@ const DashboardPersonalTrainer = () => {
           <li className="p-4 hover:bg-gray-700 transition-colors flex items-center space-x-3">
             <FaUserCircle className="text-xl" />
             <Link to={`/dashboard-personal-trainer/${id}/edit-profile`} className="hover:text-blue-400">Modifica Profilo</Link>
+          </li>
+          <li className="p-4 hover:bg-gray-700 transition-colors flex items-center space-x-3">
+            <FaSignOutAlt className="text-xl" />
+            <button onClick={handleLogout} className="hover:text-blue-400">Logout</button>
           </li>
         </ul>
       </div>
@@ -96,26 +126,48 @@ const DashboardPersonalTrainer = () => {
             <table className="min-w-full border-collapse text-left">
               <thead>
                 <tr className="bg-gray-200">
-                  <th className="border-b py-2 px-4 w-1/3">Nome</th>
-                  <th className="border-b py-2 px-4 w-1/3">Cognome</th>
-                  <th className="border-b py-2 px-4 w-1/3">Email</th>
+                  <th className="border-b py-2 px-4 w-1/4">Nome</th>
+                  <th className="border-b py-2 px-4 w-1/4">Cognome</th>
+                  <th className="border-b py-2 px-4 w-1/4">Email</th>
+                  <th className="border-b py-2 px-4 w-1/4">Dettagli</th>
                 </tr>
               </thead>
               <tbody>
                 {users.map(user => (
                   <tr key={user._id} className="border-b hover:bg-gray-100">
-                    <td className="py-2 px-4 w-1/3">{user.nome}</td>
-                    <td className="py-2 px-4 w-1/3">{user.cognome}</td>
-                    <td className="py-2 px-4 w-1/3">{user.email}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default DashboardPersonalTrainer;
+                    <td className="py-2 px-4 w-1/4">{user.nome}</td>
+                    <td className="py-2 px-4 w-1/4">{user.cognome}</td>
+                    <td className="py-2 px-4 w-1/4">{user.email}</td>
+                    <td className="py-2 px-4 w-1/4">
+                      <button
+                         onClick={() => fetchUserDetails(user._id)}
+                         className="text-blue-500 hover:text-blue-700"
+                       >
+                         Visualizza
+                       </button>
+                     </td>
+                   </tr>
+                 ))}
+               </tbody>
+             </table>
+           )}
+         </div>
+     
+         {selectedUser && (
+           <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
+             <h2 className="text-xl font-bold">Dettagli Utente</h2>
+             <p><strong>Nome:</strong> {selectedUser.nome}</p>
+             <p><strong>Cognome:</strong> {selectedUser.cognome}</p>
+             <p><strong>Email:</strong> {selectedUser.email}</p>
+             <p><strong>Obiettivo:</strong> {selectedUser.obiettivo}</p>
+             <p><strong>Altezza:</strong> {selectedUser.altezza} cm</p>
+             <p><strong>Peso:</strong> {selectedUser.peso} kg</p>
+             {/* Aggiungi altri campi necessari */}
+           </div>
+         )}
+       </div>
+     </div>
+       );
+     };
+     
+     export default DashboardPersonalTrainer;

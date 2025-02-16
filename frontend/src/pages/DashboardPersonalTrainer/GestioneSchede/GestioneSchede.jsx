@@ -14,6 +14,7 @@ const GestioneSchede = () => {
   });
   const [editingWorkout, setEditingWorkout] = useState(null); // Stato per la scheda in modifica
   const [errorMessage, setErrorMessage] = useState(""); // Per visualizzare eventuali errori
+  const [successMessage, setSuccessMessage] = useState(""); // Per visualizzare i messaggi di successo
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,6 +83,7 @@ const GestioneSchede = () => {
       setWorkouts([...workouts, response.data]);
       setNewWorkout({ descrizione: "", id_utente: "", esercizi: [] });
       setErrorMessage("");  // Rimuoviamo eventuali messaggi di errore
+      setSuccessMessage("Scheda creata con successo!"); // Messaggio di successo
 
       console.log("Scheda creata:", response.data);
     } catch (error) {
@@ -131,6 +133,7 @@ const GestioneSchede = () => {
 
       // Rimuoviamo la scheda anche dalla lista nel frontend
       setWorkouts(workouts.filter(workout => workout._id !== id));
+      setSuccessMessage("Scheda rimossa con successo!"); // Messaggio di successo
 
       console.log("Scheda rimossa:", id);
     } catch (error) {
@@ -179,6 +182,7 @@ const GestioneSchede = () => {
       setEditingWorkout(null);
       setNewWorkout({ descrizione: "", id_utente: "", esercizi: [] });
       setErrorMessage("");  // Rimuoviamo eventuali messaggi di errore
+      setSuccessMessage("Scheda aggiornata con successo!"); // Messaggio di successo
 
       console.log("Scheda aggiornata:", response.data);
     } catch (error) {
@@ -192,6 +196,7 @@ const GestioneSchede = () => {
       <h1 className="text-2xl font-bold">Gestione Schede di Allenamento</h1>
 
       {errorMessage && <div className="bg-red-500 text-white p-2 my-4">{errorMessage}</div>}
+      {successMessage && <div className="bg-green-500 text-white p-2 my-4">{successMessage}</div>}
 
       <h2 className="text-xl font-bold mt-6">Schede Esistenti</h2>
       {workouts.length === 0 ? (
