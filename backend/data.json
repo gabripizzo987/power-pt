@@ -41,7 +41,8 @@
       "documentUrl": "/uploads/1739737014099.pdf",
       "approved": true,
       "utenti_iscritti": [
-        "67b276bf8945866aa793cd6f"
+        "67b276bf8945866aa793cd6f",
+        "67b396f5610d3429b75666fc"
       ],
       "palestra_id": "67585b2e273efb169919c87b",
       "profilePicture": "uploads\\1739746077754.jpg"
@@ -142,9 +143,22 @@
         "67b26fddfc751854f82ce1ac",
         "67b27081fc751854f82ce1ad",
         "67b273ab21919bb3773051a6",
-        "67b2757ad6b9611648d61bbf"
+        "67b2757ad6b9611648d61bbf",
+        "67b38a7d610d3429b75666fb"
       ],
       "id_palestra": "67585b2e273efb169919c87b"
+    },
+    {
+      "_id": "67b396f5610d3429b75666fc",
+      "nome": "utente",
+      "cognome": "5",
+      "email": "utente5@gmail.com",
+      "password": "$2b$10$d6qOAki2rQDc1Twk4d2kIeiXaCrjKBffA3ETDQ2y/reCZnSVGYg32",
+      "obiettivo": "perdere peso",
+      "altezza": 180,
+      "peso": 90,
+      "dataRegistrazione": "2025-02-17T20:07:17.395Z",
+      "trainer_id": "67b247b67231d701a7357f0d"
     }
   ],
   "schedaAllenamento": [
@@ -754,6 +768,25 @@
           "dataPagamento": "2025-02-16T23:38:01.461Z",
           "metodoPagamento": "card",
           "transazioneId": "cs_test_a1CdLvDAFqVgTSqRl1VgMdCwVjzdF4ZE7dhO1I8fRuv7pgG7QwkYjrlZZU"
+        }
+      ],
+      "palestra_id": "67585b2e273efb169919c87b"
+    },
+    {
+      "_id": "67b39718610d3429b75666fd",
+      "utenteId": "67b396f5610d3429b75666fc",
+      "dataInizio": "2025-02-17T20:07:52.263Z",
+      "dataScadenza": "2025-03-17T20:07:52.263Z",
+      "tipoAbbonamento": "mensile",
+      "stato": "attiva",
+      "pagamenti": [
+        {
+          "pagamentoStripeId": "pi_3QtabYAYGtXYhm6H0V9HBYeU",
+          "importo": 30,
+          "statoPagamento": "completato",
+          "dataPagamento": "2025-02-17T20:07:52.263Z",
+          "metodoPagamento": "card",
+          "transazioneId": "cs_test_a17miNMccSYHJCOZQVOYyq6netruwgZgv9nSbazq04OrHZsglR3tvSttoQ"
         }
       ],
       "palestra_id": "67585b2e273efb169919c87b"

@@ -21,30 +21,35 @@ const Pagamento = () => {
   };
 
   const handlePagamento = async () => {
-    if (!userId) {
-      alert("User ID non trovato");
-      return;
+  if (!userId) {
+    alert("User ID non trovato");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    console.log("Inizio pagamento per userId:", userId, "con abbonamento:", abbonamento);
+
+    const { data } = await axios.post("http://localhost:3000/api/creaCheckoutSession", {
+      userId,
+      tipoAbbonamento: abbonamento,
+    });
+
+    console.log("Sessione di pagamento creata:", data);
+
+    if (!data.url) {
+      throw new Error("URL Stripe mancante nella risposta del backend");
     }
 
-    setLoading(true);
-
-    try {
-      console.log('Inizio pagamento per userId:', userId, 'con abbonamento:', abbonamento);
-      const { data } = await axios.post('http://localhost:3000/api/creaCheckoutSession', { 
-        userId,
-        tipoAbbonamento: abbonamento
-      });
-
-      console.log('Sessione di pagamento creata:', data.sessionId);
-      const stripe = window.Stripe('pk_test_51QMdXtAYGtXYhm6Hd6EpGPerA0X1PSP7IY7aqdrxxZ6InUEI6j5r4vFFSBwLz5HfDXT0kvq6Byso4Bl8NMeED6Dk002aXANu8W'); 
-      await stripe.redirectToCheckout({ sessionId: data.sessionId });
-    } catch (error) {
-      console.error('Errore durante il pagamento:', error);
-      alert('Errore durante il pagamento');
-    } finally {
-      setLoading(false);
-    }
-  };
+    window.location.href = data.url;
+  } catch (error) {
+    console.error("Errore durante il pagamento:", error);
+    alert(error.response?.data?.details || error.message || "Errore durante il pagamento");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="container mx-auto p-4 mt-20">
